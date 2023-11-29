@@ -12,8 +12,7 @@ mv client/dist server/src/main/resources/webroot
 
 # build server
 cd server
-./gradlew clean assemble
 
 # build the docker container
-docker buildx build --push --platform linux/arm64/v8,linux/amd64 --tag esperotech/yaade:nightly .
+docker buildx build --platform linux/amd64 -f Dockerfile -t cloudgrin/yaade:latest . --push
 

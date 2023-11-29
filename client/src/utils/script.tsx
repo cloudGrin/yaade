@@ -1,3 +1,5 @@
+import md5 from 'crypto-js/md5';
+import sha1 from 'crypto-js/sha1';
 import jp from 'jsonpath';
 import { DateTime } from 'luxon';
 
@@ -31,6 +33,8 @@ function executeResponseScript(
   };
   args.jp = jpath;
   args.DateTime = DateTime;
+  args.md5 = md5;
+  args.sha1 = sha1;
   if (isCollectionLevel) {
     args.log = (...data: any[]) =>
       console.log(
@@ -65,9 +69,12 @@ async function executeRequestScript(
     body: request.data.body,
     method: request.data.method,
     headers: kvRowsToMap(request.data.headers ?? []),
+    originRequest: request,
   };
   args.jp = jpath;
   args.DateTime = DateTime;
+  args.md5 = md5;
+  args.sha1 = sha1;
   args.exec = exec;
   if (isCollectionLevel) {
     args.log = (...data: any[]) =>

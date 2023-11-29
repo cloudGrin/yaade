@@ -14,13 +14,6 @@ const createSandboxedFunction = function (
     }
   });
 
-  const blacklist = [
-    ...Object.getOwnPropertyNames(window).filter(
-      (e) => e !== 'eval' && e !== 'arguments',
-    ),
-  ];
-
-  params.push(...blacklist);
   if (isAsync) {
     script = `return (async function() {${script}})()`;
   }
